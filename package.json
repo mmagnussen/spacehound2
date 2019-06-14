@@ -1,0 +1,20 @@
+{
+  "name": "spacebox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ctrl.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "bin": {
+    "spacebox": "./ctrl.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "daemonize3": "^1.0.2",
+    "express": "^4.17.1",
+    "open": "^6.3.0"
+  }
+}
