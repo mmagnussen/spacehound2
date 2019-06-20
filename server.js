@@ -11,7 +11,5 @@ app.get('/', function (request, result) {
 
 app.listen(port);
 
-(async () => {
-  await open(('http://localhost:' + port));
-})()
+open('http://localhost:' + port)
 
