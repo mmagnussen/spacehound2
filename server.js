@@ -5,15 +5,11 @@ const open = require('open');
 const express = require('express');
 const app = express();
 
-console.log(process.argv[1]);
-
 app.get('/', function (request, result) {
-    result.send(process.argv[1])
+    result.send(process.argv.slice(2, -1).join(' '))
 });
-
-module.exports = app;
 
 app.listen(port);
 
-//open(('localhost:' + port), { wait: false });
+open('http://localhost:' + port)
 
