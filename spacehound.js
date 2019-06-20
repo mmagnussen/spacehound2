@@ -94,7 +94,7 @@ const spacehound = function () {
                     occurrence_tally.push(`<input type="checkbox" id="scales" name="scales"
                     >
              <label for="scales">S</label>${file.file_name} - line:${lineNum} - col:${col} - occurrence:(${occurrence.replace(/</gi, '&#60;').replace(/>/gi, '&#62;')})`) //use [regex].exec to return an array where the first group is the entire match, while the second element of each array will be the capture group (in order)
-                    console.log(occurrence);
+                    //console.log(occurrence);
                 }
             }
         }

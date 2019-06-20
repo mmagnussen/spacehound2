@@ -1,23 +1,22 @@
 #!/usr/bin/env node
 
 const path = require("path");
-
-const reporter = require("daemonize3").Runner({
+//const spacehound = require('./spacehound');
+//const sendMsg = spacehound();
+const reporter = require("daemonize2").setup({
     main: './server.js',
     name: 'Spacehound',
-    cwd: process.cwd(),
     pidfile: path.join(__dirname, "path.pid"),
-
+    silent: false
 });
 
+// process.on('unhandledRejection', err => { console.log(err) });
 
-// if there's a stylecheck server already running, stop it, then restart
-
-if (reporter.getStatus() !== 0) {
-    reporter.stop();
-    reporter.startDaemon();
+if (reporter.status() !== 0) {
+    reporter.kill(() => reporter.start());
 } else {
-    reporter.startDaemon();
+    reporter.start();
 }
+
 
 
