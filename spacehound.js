@@ -86,10 +86,10 @@ const spacehound = function () {
 
             if (regex_occ_list) {
                 for (const occurrence of regex_occ_list) {
-                    let text_halves = file.file_text.split(occurrence) //creates array, separting text into two chunks around that span 
+                    let text_halves = file.file_text.split(occurrence) //creates array, separting text into two chunks around that span
                     let first_half = text_halves[0].split('\n')
                     let lineNum = first_half.length           //returns number of elements, which would be lines before the span
-                    let col = first_half[first_half.length - 1].length + 1   //in the first_half array, the index will be one less than the length (which doesn't start at 0).  the final .length will return the final string member of that 
+                    let col = first_half[first_half.length - 1].length + 1   //in the first_half array, the index will be one less than the length (which doesn't start at 0).  the final .length will return the final string member of that
 
                     occurrence_tally.push(`<input type="checkbox" id="scales" name="scales"
                     >
@@ -104,7 +104,7 @@ const spacehound = function () {
         // console.log(i.header + `${ occurrence_tally.join("\n") }`);
     }
 
-    const sendMsg = `<doctype=HTML>
+    const sendMsg = `<!DOCTYPE html>
     <html><head><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css" />${styles}</head>
     <body>
     <div class="pageBackground stars">
