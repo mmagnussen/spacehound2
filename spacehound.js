@@ -28,33 +28,38 @@ const reg_reports = [
 
     { regex: /<span class="[^l][^"]+">[^ ]*[(){};.,'"!?]+<\/span>[a-zA-Z0-9(){}",]/g, header: "Spans Needing A Space:", regex1: `(&#60;span class="[^l][^"]+"&#62;)?[^ ]*[(){};.,\'"!?]+&#60;\/span&#62;([a-z0-9(){}",]\s?[^ ]*)` },
 
-    { regex: /[^ ]*[a-zA-Z0-9.](<span class="[^n].*?">|<\/span>)(<span class="[^n].*?">|<\/span>)?(<span class="[^n].*?">|<\/span>)?([A-Za-z.,0-9]*)?(&#60;span class="[^n].*?"&#62;|&#60;\/span>)?[A-Za-z0-9][^ ]*/g, header: 'Find other potential spans Needing A Space:', regex1: `([\w(){};.,\'"!?]+)(&#60;\/span&#62;)([\w]+)` },
+    { regex: /............[^ ]*[a-zA-Z0-9.](<span class="[^nl].*?">|<\/span>)(<span class="[^nl].*?">|<\/span>)?(<span class="[^nl].*?">|<\/span>)?([A-Za-z.,0-9]*)?(<span class="[^nl].*?">|<\/span>)?[A-Za-z0-9][^ ]*............../g, header: '<b>SPANS #2</b>  potentially needing a space:', regex1: `([\w(){};.,\'"!?]+)(&#60;\/span&#62;)([\w]+)` },
 
-    { regex: /([^ ]*\s?[^ ]+)\s+([,;:)])/g, header: "Punctuation Needing A Preceding Space:", regex1: `([^ ]+)\s+([,;:)])` },
+    { regex: /............[^ (=]*(<span class="[^nl].*?">)(<\/span>)(<span class="[^nl].*?">|<\/span>)?(<span class="[^nl].*?">|<\/span>)?([A-Za-z.,0-9]*)?(<span class="[^nl].*?">|<\/span>)?[A-Za-z0-9][^ ]*............../g, header: '<b>SPANS #3</b>  potentially needing a space:', regex1: `([\w(){};.,\'"!?]+)(&#60;\/span&#62;)([\w]+)` },
 
-    { regex: /,([^"’”'<0-9 \s—]+)/g, header: "Commas Without A Following Space:", regex1: `,([^\"’”\'&#60;0-9 \s—]+)` },
+
+    { regex: /..........([^ ]*\s?[^ ]+)\s+([,;:)])........./g, header: "Punctuation Needing A Preceding Space:", regex1: `([^ ]+)\s+([,;:)])` },
+
+    { regex: /.........,([^&"’”'<0-9 \s—]+)/g, header: "Commas Without A Following Space:", regex1: `,([^\"’”\'&#60;0-9 \s—]+)` },
 
     { regex: /[^ ]*<\/span>\(\s?[^ ]*/g, header: "Parentheses Needing A Space Removed:", regex1: `(\()\s+([^ ]+)` },
 
     { regex: /(<p>|<p class="[^p][^"]*").*?\s?[^ ]*[a-z0-9]\s?<\/p>\s*<[^buo]/g, header: "End of a &#60;p&#62; Element without Punctuation:", regex1: `[a-z]\s?&#60;/p&#62;` },
 
-    { regex: /[^ ]*\s?<span class=\"([^"]+)\">([^>]+)<\/span><span class="\1">[^ ]*/g, header: "Possibly Redundant Tags:", regex1: `&#60;span class="([^"]+)"&#62;([^&#62;]+)&#60;/span&#62;&#60;span class="\\1"&#62;` },
+    { regex: /..........[^ ]*\s?<span class=\"([^"]+)\">([^>]+)<\/span><span class="\1">[^ ]*......../g, header: "REDUNDANT TAGS #1:", regex1: `&#60;span class="([^"]+)"&#62;([^&#62;]+)&#60;/span&#62;&#60;span class="\\1"&#62;` },
 
-    { regex: /[^ ]*<\/a><\/sup>[a-z]+\.?/g, header: "&#60;sup&#62; Tags that May Need a Following Space:", regex1: `(&#60;/ a &#62;&#60; /sup&#62;)([a-z].)` },
+    { regex: /...........<span class="([^"]*)">([^<]*)<\/span>(\s*)<span class="\1">([^<]*)<\/span>.........../g, header: "REDUNDANT TAGS #2:", regex1: `&#60;span class="([^"]+)"&#62;([^&#62;]+)&#60;/span&#62;&#60;span class="\\1"&#62;` },
+
+    { regex: /...........<\/a><\/sup>[a-z]+\.?/g, header: "&#60;sup&#62; Tags that May Need a Following Space:", regex1: `(&#60;/ a &#62;&#60; /sup&#62;)([a-z].)` },
 
     { regex: /[^ ]*\s[“"”]\s/g, header: "Quotation Marks that may Need a Space Removed:", regex1: `\s"\s` },
 
     { regex: /[^ ]*<\/sup> \.[^ ]*/g, header: "Potential Space Between Closing Sup tags and a Period:", regex1: `&#60;/sup&#62; \.` },
 
-    { regex: /[^ ]*\s+<sup class="fn"/g, header: "Space Before An Inline Footnote Ref:", regex1: `[^ ]*\s*&#60;sup class="fn"` },
+    { regex: /.........[^ ]*\s+<sup class="fn"/g, header: "Space Before An Inline Footnote Ref:", regex1: `[^ ]*\s*&#60;sup class="fn"` },
 
-    { regex: /\s[^ ]*\s?[.!?](<[^>]*>)?(<[^>]*>)?(<[^>]*>)?(<[^>]*>)?["A-Z][a-zA-Z]+\s/g, header: "Potential Lack of Space after a Period:", regex1: `([\.\?])((&#60;/span&#62;)?(&#60;[^&#62;]*&#62;)?(["A-Z][a-zA-Z]+))` },
+    { regex: /\s[^ ]*\s?[.!?](<[^!][^>]*[^?]>)(<[^!][^>]*[^?]>)?(<[^!][^>]*[^?]>)?(<[^!][^>]*>)?["A-Z][a-zA-Z]+\s/g, header: "Potential Lack of Space after a Period:", regex1: `([\.\?])((&#60;/span&#62;)?(&#60;[^&#62;]*&#62;)?(["A-Z][a-zA-Z]+))` },
 
     { regex: /\s[A-Z]?[a-z]+[A-Z][a-z]+\s/g, header: "Find Potential Lack of Space between a word and capitalized word:", regex1: `(\s?[A-Z]?[a-z]+)([A-Z][a-z]+)` },
 
-    { regex: /[^0][;](<[^/>]*>)?[^"’”'<0-9 \s—]+/g, header: "Find Potential Lack of Space after a semicolon:", regex1: `([^0][;])((&#60;/span&#60;)?(&#62;[^&#62;]*&#62;)?([^"’”'&#60;0-9 \s—]+))` },
+    { regex: /.........\s[^&# ]+;\w........../g, header: "Find Potential Lack of Space after a semicolon:", regex1: `([^0][;])((&#60;/span&#60;)?(&#62;[^&#62;]*&#62;)?([^"’”'&#60;0-9 \s—]+))` },
 
-    { regex: /<\/sup>[a-zA-Z]+/g, header: "Find Potential Lack of Space between an ending sup tag and a capitalized word:", regex1: `([^ ]*\s?&#60;\/sup&#62;)([A-Z][^ ]*)` },
+    { regex: /[^ ]+<\/sup>[a-zA-Z]+\s?[^ ]+/g, header: "Find Potential Lack of Space between an ending sup tag and a capitalized word:", regex1: `([^ ]*\s?&#60;\/sup&#62;)([A-Z][^ ]*)` },
 
     { regex: /([^ ]\.)\s+([“"])\s/g, header: "Find Potential Lack of Space between a period and beginning quotation marks:", regex1: `([^ ]+\s?\.)([“"][^ ]*)` },
 
@@ -62,15 +67,21 @@ const reg_reports = [
 
     { regex: /\s[^&][a-zA-Z0-9]+;[a-z]/g, header: "Find Potential Lack of Space After A Semicolon (after a digit):", regex1: `([^ ]*\s?\d+;)([a-z]*\s?[^ ]*)` },
 
-    { regex: /\s[^ ]+[a-z>]:[^te ][<a-zA-Z][^ ]*\s/g, header: "Find Colons That May Need A Following Space:", regex1: `([^ ]+[a-z]:)([A-Z][^ ]+)` },
+    { regex: /[^ ]+\s[^ ]+\s[^ ]+[a-z>]:[^te ][<a-zA-Z][^ ]+\s[^ ]+/g, header: "Find Colons That May Need A Following Space:", regex1: `([^ ]+[a-z]:)([A-Z][^ ]+)` },
+
+    { regex: /[^ ]+\s[bcdefghjklmnopqrestuvwxyz]\s[^ ]+/g, header: "Find isolated consonants:", regex1: `\\s[bcdefghjklmnopqrestuvwxyz]\\s` },
+
+    { regex: /<span class="i">([^A-Z][^<]*[āåâêëėèēîīôöòōûüū][^<]*)<\/span>/g, header: "Find characters potentially needing lang tags:", regex1: `&#60;span class="i"&#62;([^A-Z][^&#60;]*[āåâêëėèēîīôöòōûüū][^&#60;]*)&#60;/span&#62;` },
 
     //{ regex: /([^ ]*\s?[^ ]+\s?<\/span>)(\([^ ]*)/g, header: ` Find parentheses that may need a space after a span: &#160;&#160;   ([^ ]*\s?[^ ]+\s?&#60;\/span&#62;)(\([^ ]*)   &#160;&#160;` },
 
-    { regex: /(\s[^>/= ]*\s[-–][^</= ]*\s|\s[^>/= ]*[-–]\s[^</= ]*\s)/g, header: "Possible spacing issues around dashes/emdashes:", regex1: `(\s[^&#62;/= ]*\s[-–][^&#60;/= ]*\s|\s[^&#62;/= ]*[-–]\s[^&#60;/= ]*\s)   &#160;&#160;` },
+    { regex: /(\s[^>/= ]*\s[-–][^</= ]*\s|\s[^>/= ]*[-–]\s[^</= ]*\s)/g, header: "Possible spacing issues around dashes/emdashes:", regex1: `(\s[^&#62;/= ]*\s[-–][^&#60;/= ]*\s|\s[^&#62;/= ]*[-–]\s[^&#60;/= ]*\s)` },
 
     { regex: /(<a)(( class="url")?( href="http[^"]+")?>(.*?)<\/a>)/g, header: "Find links that may need _target markup:", regex1: `&#60;a(( class="url")?( href="http[^"]+")?&#62;(.*?)&#60;/a&#62;) ADD:  target="_blank" to link` },
 
-    { regex: /.....[^"]http....../g, header: "Find potentially un-tagged web addresses (After line 3):", regex1: `ttp` }
+    { regex: /.....[^"]http....../g, header: "Find potentially un-tagged web addresses (After line 3):", regex1: `.......[^"]ttp......` },
+
+    { regex: /.................\s(?<!>|o|e|v)v(?:\.|er(?:\.|s(?:\.|es?)?)?|(?:[sv](?:\.|s\.?)?))?( )?\d+.........../g, header: "SCRIPTURE - potentially un-tagged refs:", regex1: `.......\\s(?&#60;!&#62;|o|e|v)v(?:\\.|er(?:\\.|s(?:\.|es?)?)?|(?:[sv](?:\\.|s\\.?)?))?( )?\\d+......` }
 ]
 
 const spacehound = function () {
@@ -97,7 +108,7 @@ const spacehound = function () {
                 }
             }
         }
-        msg.push(`<section> <p><b>${occurrence_tally.length === 0 ? `<span class="green">&#10003;` : `<span class="red">&#9873;&#160;&#160;<label class="read-more-toggle-label" for="read-more-toggle-${index + 1}">${occurrence_tally.length}&#160;&#160;Occurrence${occurrence_tally.length == 1 ? "" : "s"}</label>&#160;&#160;`}</span>&#160;&#160;${i.header}<br /><br />&#160;&#160;&#160;&#160;<span class="franklin">${i.regex1}</span></b> </p><article><input id="read-more-toggle-${index + 1}" class="read-more-toggle" type="checkbox"><div class="read-more-content"> <p>${occurrence_tally.join("<br /><br />\n")}</p></div></article></section>`);
+        msg.push(`<section> <p>${occurrence_tally.length === 0 ? `<span class="green">&#10003;` : `<span class="red">&#9873;&#160;&#160;<label class="read-more-toggle-label" for="read-more-toggle-${index + 1}">${occurrence_tally.length}&#160;&#160;Occurrence${occurrence_tally.length == 1 ? "" : "s"}</label>&#160;&#160;`}</span>&#160;&#160;<span class="montserrat">${i.header}</span><br /><br />&#160;&#160;&#160;&#160;<span class="franklin">${i.regex1}</span> </p><article><input id="read-more-toggle-${index + 1}" class="read-more-toggle" type="checkbox"><div class="read-more-content"> <p>${occurrence_tally.join("<br /><br />\n")}</p></div></article></section>`);
         // console.log(occurrence_tally);
         //console.log(msg.join());
         // console.log(i.header + `${ occurrence_tally.join("\n") }`);

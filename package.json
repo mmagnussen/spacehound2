@@ -8,7 +8,7 @@
     "start": "node server.js"
   },
   "bin": {
-    "spacebox": "./ctrl.js"
+    "spacehound2": "./ctrl.js"
   },
   "author": "",
   "license": "ISC",
